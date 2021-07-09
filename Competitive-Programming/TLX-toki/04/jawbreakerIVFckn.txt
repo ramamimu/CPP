@@ -1,0 +1,174 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int **arr, **forSecond;
+bool **ever, **Fc;
+
+bool notVisited(int r, int c, int numb)
+{
+    if((forSecond[r][c]==numb) && (!ever[r][c]))
+    {
+        ever[r][c]=true;
+        return true;
+    }
+    else
+        return false;
+}
+
+int temp, temp2;
+void firstLoop(int n, int m, int r, int c, int numb, int sign)
+{
+    if((r<n && r>=0)&& (c<m && c>=0))
+        if(notVisited(r, c, numb))
+        {
+            if(sign==1)
+            {
+                temp++;
+//                forSecond[r][c]=0;
+            }
+            else
+                temp2++;
+            firstLoop(n, m, r+1, c, numb, sign);
+            firstLoop(n, m, r-1, c, numb, sign);
+            firstLoop(n, m, r, c+1, numb, sign);
+            firstLoop(n, m, r, c-1, numb, sign);
+        }
+}
+
+void swapping (int index, const int r, const int c, int zero=0)
+{
+    if (index<r)
+    {
+        if(ever[index][c])
+        {
+            cout<<index<<' '<<c<<endl;
+            for(int i=index; i>zero; i--)
+            {
+                swap(forSecond[i][c], forSecond[i-1][c]);
+                ever[i][c]=false;
+            }
+            ever[zero][c]=true;
+            zero++;
+        }
+        swapping(index+1, r, c, zero);
+    }
+}
+
+int secondLoop(int n, int m)
+{
+    int cost=0;
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+        {
+            if (ever[i][j])
+                continue;
+            else
+                firstLoop(n, m, i, j, forSecond[i][j], 2);
+            
+            if(temp2>cost)
+                cost=temp2;
+            temp2=0;
+        }
+    return cost*(cost-1);
+}
+
+void newTemp(int n, int m)
+{
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+            forSecond[i][j]=arr[i][j];
+}
+
+void newBool(int n, int m)
+{
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+            ever[i][j]=false;
+}
+
+void copyThat(int n, int m)
+{
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+            Fc[i][j]=ever[i][j];
+}
+
+void recovery(int n, int m)
+{
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+            ever[i][j]=Fc[i][j];
+    
+}
+
+int main()
+{
+    int n,m;
+    cin>>n>>m;
+
+    arr=(int**) malloc (n*sizeof(int*));
+    forSecond=(int**) malloc (n*sizeof(int*));
+    ever=(bool**) malloc (n*sizeof(bool*));
+    Fc=(bool**) malloc (n*sizeof(bool*));
+    for(int i=0; i<n; i++)
+    {
+        arr[i]=(int*) malloc (m*sizeof(int));
+        forSecond[i]=(int*) malloc (m*sizeof(int));
+        ever[i]=(bool*) malloc (m*sizeof(bool));
+        Fc[i]=(bool*) malloc (m*sizeof(bool));
+    }
+
+    for(int i=0; i<n; i++)
+        for(int j=0; j<m; j++)
+        {
+            cin>>arr[i][j];
+            ever[i][j]=false;
+            forSecond[i][j]=arr[i][j];
+        }
+    int res=0;
+    for(int i=0; i<n; i++)
+        for (int j = 0; j < m; j++)
+        {
+            if(ever[i][j])
+                continue;
+         
+            firstLoop(n, m, i, j, arr[i][j], 1);
+            copyThat(n, m);
+            for(int k=0; k<m; k++)
+                swapping(0, n, k);
+            temp=temp*(temp-1);
+            cout<<"TEMP = "<<temp<<endl;
+            for(int k=0; k<n; k++)
+                {
+                    for(int l=0; l<m; l++)
+            {
+                    cout<<forSecond[k][l]<<' ';
+            }
+            cout<<endl;
+                }
+            if(temp==0)
+                continue;
+            
+//            newTemp(n, m);
+            int cost=secondLoop(n, m);
+            cout<<' '<<cost<<endl;
+            for(int k=0; k<n; k++)
+                {
+                    for(int l=0; l<m; l++)
+            {
+                    cout<<forSecond[k][l]<<' ';
+            }
+            cout<<endl;
+                }
+//            if ((temp+cost)>res)
+//                res=(temp+cost);
+            recovery(n, m);
+            temp=0;
+//            cost=0;
+            newTemp(n, m);
+        }
+//    cout<<res<<endl;
+
+    return 0;
+}

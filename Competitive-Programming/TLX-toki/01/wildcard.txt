@@ -1,0 +1,26 @@
+0
+di depan
+di belakang
+di tengah
+
+a*
+5
+a
+a
+aaaaa
+a
+a
+
+a*a
+a=1
+b=1
+
+
+
+ma*a
+5
+ulam
+akanmua
+mamua
+ain
+mamaa
