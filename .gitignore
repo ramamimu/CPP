@@ -28,5 +28,6 @@ obj/
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,codeblocks
 *.exe
 *.o
+*.out
 repo_github/
 .cph/
