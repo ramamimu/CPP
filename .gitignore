@@ -29,3 +29,4 @@ obj/
 *.exe
 *.o
 repo_github/
+.cph/
