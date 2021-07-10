@@ -1,0 +1,16 @@
+link praktikum dasar pemrograman
+
+- Praktikum 1
+https://www.hackerrank.com/dpg-m1
+
+- Praktikum 2
+https://www.hackerrank.com/contests/dp-modul-2-g/challenges
+
+- Praktikum 3
+https://www.hackerrank.com/contests/dp-modul-3-g/
+
+- Praktikum 4
+https://www.hackerrank.com/contests/dp-modul-4-g/
+
+- Praktikum 5
+www.hackerrank.com/dp-modul-5-g
