@@ -1,0 +1,4 @@
+! Dont understand about
+Little bit about constructor
+overload operator
+this->
