@@ -33,3 +33,7 @@ repo_github/
 .cph/
 .vscode/
 lain/
+
+*
+!/**/
+!*.*
