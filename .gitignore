@@ -31,6 +31,10 @@ obj/
 *.out
 repo_github/
 .cph/
+<<<<<<< HEAD
 .vscode/
 lain/
 
+=======
+.vscode/*
+>>>>>>> 41705d30a4693a5b561a49c5060e21be3a7999ad
