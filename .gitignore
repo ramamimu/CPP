@@ -31,8 +31,4 @@ obj/
 *.out
 repo_github/
 .cph/
-.vscode/
-
-*
-!/**/
-!*.*
+.vscode/*
